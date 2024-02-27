@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="form-container">
+    <div class="contact-us">
+        <h1>Contact Us Section<h1>
+    </div>
+    <div class="para-contact">
+    <p>Hi there! We would love to hear from you. You can contact us through this form below.</p>
+    </div>
+    <form method="POST" action="{{ url_for('contact') }}">
+        {{form.csrf_token }}
+        <div class="name-pt">
+            <h5>{{ form.name.label}} <span>(Required)</span><h5>
+            <p>Please enter your full name</p>
+            {{ form.name(placeholder="Ariana Greenblatt") }}<br>
+            {% for error in form.name.errors %}
+            <span> {{error}} </span>
+            {%endfor%}
+        </div>
+        <div class="email-pt">
+            <br><h5>{{form.email.label}}<span> (Required)</span><h5>
+            <p>Please enter your email address</p>
+            {{ form.email(placeholder="ariblatt@example.com") }}
+            {% for error in form.email.errors %}
+            <span> {{error}} </span>
+            {%endfor%}
+        </div>
+        <div class="subj">
+            <br><h5>{{form.subject.label}} <span>(Required)</span><h5>
+            <p>Please enter your message subject.</p>
+            {{ form.subject(placeholder="Subject") }}
+            {% for error in form.subject.errors %}
+            <span> {{error}} </span>
+            {%endfor%}
+        </div>
+        <div class="msg-section">
+            <br><h5>{{form.message.label}} <span>(Required)</span><h5>
+            <p>Please enter your message.</p>
+            <div class="msg-area">{{ form.message(placeholder="Message") }}</div>
+            {% for error in form.message.errors %}
+            <span> {{error}} </span>
+            {%endfor%}
+        </div>
+        <div class="btn_sub">
+            <button type="submit">Send</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
